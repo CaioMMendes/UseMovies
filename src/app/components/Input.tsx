@@ -8,12 +8,12 @@ interface InputProps extends ComponentPropsWithoutRef<"input"> {
 
 function Input(
   { className, error, errorMessage, ...props }: InputProps,
-  ref: LegacyRef<HTMLInputElement> | undefined
+  ref: LegacyRef<HTMLInputElement> | undefined,
 ) {
   const inputClassName = twMerge(
     className,
     "rounded-lg border border-primary-4 p-2 text-sm font-normal bg-primary-4/80 placeholder-primary-3 placeholder-opacity-70 outline-none transition-all",
-    error ? "border-red-500" : "focus:ring-1 focus:ring-primary-3"
+    error ? "border-red-500" : "focus:ring-1 focus:ring-primary-3",
   );
 
   return (
