@@ -20,7 +20,7 @@ export default async function getMovies({ page = 1, search }: GetMoviesProps) {
   );
   if (response.ok) {
     const movies = await response.json();
-    console.log(movies);
+    // console.log(movies);
     return {
       status: 200,
       message: "Filmes encontrados com sucesso",
