@@ -2,6 +2,7 @@
 import { useState } from "react";
 import MoviesList from "./movies-list";
 import { MinusIcon, PlusIcon } from "lucide-react";
+import Button from "./button";
 
 const MoviesWatched = () => {
   const [isOpenList, setIsOpenList] = useState(true);
@@ -16,25 +17,26 @@ const MoviesWatched = () => {
         <div
           className={`${
             isOpenList && "rounded-b-none"
-          } flex justify-between w-full  items-center rounded-lg px-2 py-2 bg-primary-3/70`}
+          } flex w-full items-center  justify-between rounded-lg bg-primary-3/70 px-2 py-2`}
         >
-          <h2 className="w-full justify-start items-center uppercase font-medium">
+          <h2 className="w-full items-center justify-start font-medium uppercase">
             Filmes que você já assistiu
           </h2>
-          <button
+          <Button
             onClick={handleIsOpenList}
-            className="rounded-full flex items-center  justify-center bg-primary-5 p-1"
+            variant="botao"
+            className="w-fit rounded-full p-1"
           >
             {isOpenList ? (
               <MinusIcon width={24} height={24} />
             ) : (
               <PlusIcon width={24} height={24} />
             )}
-          </button>
+          </Button>
         </div>
-        <div className="flex justify-between items-center"></div>
+        <div className="flex items-center justify-between"></div>
       </div>
-      {isOpenList && <MoviesList rounded={false} />}
+      {isOpenList && <MoviesList movies={[]} rounded={false} />}
     </div>
   );
 };
