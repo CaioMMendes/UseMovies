@@ -23,10 +23,22 @@ export interface Movie {
   vote_count: number;
 }
 
+interface Infos {
+  page: number;
+  totalPage: number;
+  totalResults: number;
+}
 interface MoviesContextProps {
   movies: Movie[] | [];
   setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
-  //   isLoading: boolean;
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isError: boolean;
+  setIsError: React.Dispatch<React.SetStateAction<boolean>>;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>;
+  moviesInfo: Infos;
+  setMoviesInfo: React.Dispatch<React.SetStateAction<Infos>>;
 }
 
 const MoviesContext = createContext<MoviesContextProps | undefined>(undefined);
@@ -37,6 +49,14 @@ interface MoviesProviderProps {
 
 export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const [moviesInfo, setMoviesInfo] = useState<Infos>({
+    page: 0,
+    totalPage: 0,
+    totalResults: 0,
+  });
   //   const [isLoading, setIsLoading] = useState(true);
 
   //   useEffect(() => {
@@ -50,7 +70,14 @@ export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
   const contextValue: MoviesContextProps = {
     movies,
     setMovies,
-    // isLoading,
+    isLoading,
+    setIsLoading,
+    isError,
+    setIsError,
+    search,
+    setSearch,
+    moviesInfo,
+    setMoviesInfo,
   };
 
   return (
