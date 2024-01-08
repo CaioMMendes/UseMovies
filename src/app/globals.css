@@ -11,15 +11,15 @@
   }
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.45rem;
 }
 
 ::-webkit-scrollbar-track {
-  background: #536b78;
+  background: #111d13;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cee5f2;
+  background: #618666;
   border-radius: 999px;
-} */
+}
