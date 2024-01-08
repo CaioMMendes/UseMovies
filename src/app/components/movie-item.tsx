@@ -18,7 +18,7 @@ const MovieItem = ({ movie, setIsMovieInfoOpen, movieId }: MovieItemProps) => {
 
   return (
     <Button
-      className="bg-primary-3-opacity flex w-full items-center justify-start gap-3  rounded-lg  "
+      className="flex w-full items-center justify-start gap-3 rounded-lg  bg-primary-3-opacity  "
       onClick={handleMovieItemClick}
     >
       <div className="flex w-2/5  max-w-52 items-center justify-start rounded-l-lg">
@@ -28,7 +28,7 @@ const MovieItem = ({ movie, setIsMovieInfoOpen, movieId }: MovieItemProps) => {
           alt={`${movie.title} banner`}
           width={0}
           height={0}
-          fallback="/image-not-found-backdrop.png"
+          fallback="/image-not-found-poster.png"
           sizes="100vw"
           className="h-auto  w-auto  rounded-l-lg"
           style={{

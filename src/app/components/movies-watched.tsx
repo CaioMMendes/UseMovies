@@ -4,6 +4,7 @@ import MoviesList from "./movies-list";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import Button from "./button";
 import { MovieOpenTypes } from "../page";
+import MoviesWatchedList from "./movies-watched-list";
 
 interface MoviesWatchedProps {
   setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
@@ -42,10 +43,9 @@ const MoviesWatched = ({ setIsMovieInfoOpen }: MoviesWatchedProps) => {
         <div className="flex items-center justify-between"></div>
       </div>
       {isOpenList && (
-        <MoviesList
+        <MoviesWatchedList
           setIsMovieInfoOpen={setIsMovieInfoOpen}
           movies={[]}
-          rounded={false}
         />
       )}
     </div>

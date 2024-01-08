@@ -35,12 +35,7 @@ const Searchbar = () => {
     },
     queryFn: async () => await getMovies({ search: debounceSearch }),
   });
-  // useEffect(() => {
-  //   setMovies((movies) => [...movies, { movie: searchInput }]);
-  //   console.log(searchInput);
 
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [debounceSearch]);
   if (moviesIsLoading) {
     setIsLoading(true);
   } else {
