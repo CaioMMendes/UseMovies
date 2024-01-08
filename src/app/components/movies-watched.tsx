@@ -3,8 +3,13 @@ import { useState } from "react";
 import MoviesList from "./movies-list";
 import { MinusIcon, PlusIcon } from "lucide-react";
 import Button from "./button";
+import { MovieOpenTypes } from "../page";
 
-const MoviesWatched = () => {
+interface MoviesWatchedProps {
+  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
+}
+
+const MoviesWatched = ({ setIsMovieInfoOpen }: MoviesWatchedProps) => {
   const [isOpenList, setIsOpenList] = useState(true);
 
   const handleIsOpenList = () => {
@@ -12,7 +17,7 @@ const MoviesWatched = () => {
   };
 
   return (
-    <div className="flex flex-col ">
+    <div className="flex flex-1 flex-col">
       <div className={`flex flex-col items-center justify-start`}>
         <div
           className={`${
@@ -24,7 +29,7 @@ const MoviesWatched = () => {
           </h2>
           <Button
             onClick={handleIsOpenList}
-            variant="botao"
+            variant="button"
             className="w-fit rounded-full p-1"
           >
             {isOpenList ? (
@@ -36,7 +41,13 @@ const MoviesWatched = () => {
         </div>
         <div className="flex items-center justify-between"></div>
       </div>
-      {isOpenList && <MoviesList movies={[]} rounded={false} />}
+      {isOpenList && (
+        <MoviesList
+          setIsMovieInfoOpen={setIsMovieInfoOpen}
+          movies={[]}
+          rounded={false}
+        />
+      )}
     </div>
   );
 };

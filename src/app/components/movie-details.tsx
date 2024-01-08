@@ -48,10 +48,11 @@ const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
         src={`https://image.tmdb.org/t/p/w500${movieDetailsData?.movies.backdrop_path}`}
         alt="Movie poster image"
         width={200}
+        fallback="/image-not-found-poster.png"
         height={200}
       />
       <p>descrição {movieDetailsData?.movies.overview}</p>
-      <p>tempo {movieDetailsData?.movies.runtime}</p>
+      <p>tempo {movieDetailsData?.movies.runtime.toFixed(2)}</p>
       <p>pontuação {movieDetailsData?.movies.vote_average}</p>
       asdas
     </div>

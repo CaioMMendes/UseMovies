@@ -16,7 +16,8 @@ const config: Config = {
       colors: {
         "primary-1": "#a1cca5",
         "primary-2": "#8fb996",
-        "primary-3": "#709775",
+        "primary-3": "rgb(112 151 117)",
+        "primary-3-opacity": "#618666",
         "primary-4": "#415d43",
         "primary-5": "#111d13",
       },

@@ -20,11 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br">
-      <body className={`${inter.className} flex flex-col`}>
+      <body className={`${inter.className}  flex  flex-col`}>
         <ReactQueryProvider>
           <MoviesProvider>
             <Header />
-            <main className="w-full flex-1 md:flex md:justify-center">
+            <main className="m-auto w-full max-w-screen-2xl flex-1 md:flex md:justify-center">
               {children}
             </main>
             <Footer />

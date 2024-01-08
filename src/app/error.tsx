@@ -19,7 +19,7 @@ export default function Error({
     <div className="flex flex-col items-center justify-center gap-3 p-2">
       <h2 className="text-lg ">Something went wrong!</h2>
       <Button
-        variant="botao"
+        variant="button"
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()
