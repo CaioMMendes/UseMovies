@@ -7,6 +7,8 @@ import getMovieDetails from "../fetch/get-movie-details";
 import ListError from "./list-error";
 import ListLoading from "./list-Loading";
 import ImageWithFallback from "./image-with-fallback";
+import getMovieCasts, { CasterTypes } from "../fetch/get-movie-casts";
+import CastersItem from "./casters-item";
 
 interface MovieDetailsProps {
   setIsMovieInfoOpen: Dispatch<SetStateAction<MovieOpenTypes>>;
@@ -19,15 +21,22 @@ const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
     isError: movieDetailsIsError,
     isLoading: movieDetailsIsLoading,
   } = useQuery({
-    queryKey: [movieId],
+    queryKey: ["details", movieId],
     queryFn: async () => await getMovieDetails({ id: movieId }),
   });
-
+  const {
+    data: movieCastsData,
+    isError: movieCastsIsError,
+    isLoading: movieCastsIsLoading,
+  } = useQuery({
+    queryKey: ["casts", movieId],
+    queryFn: async () => await getMovieCasts({ id: movieId }),
+  });
   const handleBackButtonClick = () => {
     setIsMovieInfoOpen({ isOpen: false });
   };
 
-  if (movieDetailsIsError) {
+  if (movieDetailsIsError || movieCastsIsError) {
     return <ListError rounded={true} />;
   }
   if (movieDetailsIsLoading) {
@@ -36,25 +45,44 @@ const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
   console.log(movieDetailsData);
   return (
     <div className="flex flex-col items-start justify-start gap-2 rounded-lg bg-primary-3">
-      <Button
-        variant="button"
-        className="w-fit rounded-full p-1"
-        onClick={handleBackButtonClick}
-      >
-        <MoveLeftIcon width={24} height={24} />
-      </Button>
+      <div className="relative flex   w-full items-center justify-start rounded-lg">
+        <ImageWithFallback
+          src={`https://image.tmdb.org/t/p/w1280${movieDetailsData?.movies.backdrop_path}`}
+          alt={`${movieDetailsData?.movies.title} banner`}
+          width={0}
+          height={0}
+          fallback="/image-not-found-backdrop.png"
+          sizes="100vw"
+          className="h-auto  w-full  rounded-lg"
+          style={{
+            objectFit: "contain",
+          }}
+        />
+        <Button
+          variant="button"
+          className="absolute left-2 top-2 w-fit rounded-full p-1"
+          onClick={handleBackButtonClick}
+        >
+          <MoveLeftIcon width={24} height={24} />
+        </Button>
+      </div>
       <h1 className="text-lg font-medium">{movieDetailsData?.movies.title}</h1>
-      <ImageWithFallback
-        src={`https://image.tmdb.org/t/p/w500${movieDetailsData?.movies.backdrop_path}`}
-        alt="Movie poster image"
-        width={200}
-        fallback="/image-not-found-poster.png"
-        height={200}
-      />
       <p>descrição {movieDetailsData?.movies.overview}</p>
       <p>tempo {movieDetailsData?.movies.runtime.toFixed(2)}</p>
       <p>pontuação {movieDetailsData?.movies.vote_average}</p>
-      asdas
+      <div>
+        <h3>Elenco</h3>
+        {movieCastsIsLoading && <div>Loading...</div>}
+        {!movieCastsIsLoading && movieCastsData?.casts !== undefined && (
+          <div className="flex w-full flex-wrap items-center justify-center gap-2">
+            {movieCastsData.casts.map((caster: CasterTypes, index: number) => {
+              return (
+                index < 10 && <CastersItem key={caster.id} caster={caster} />
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
