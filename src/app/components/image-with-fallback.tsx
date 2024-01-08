@@ -3,22 +3,40 @@ import { useState } from "react";
 import Image, { ImageProps } from "next/image";
 
 interface ImageLoaderProps extends Pick<ImageProps, "loader"> {}
+interface ImageLoaderParams {
+  src: string;
+  width: number;
+  quality?: number;
+}
 
-const ImageWithFallback = (props: ImageProps) => {
+interface ImageLoaderFunction {
+  (params: ImageLoaderParams): string;
+}
+
+interface ImageWithFallbackProps extends ImageProps {
+  fallback?: string;
+}
+
+const ImageWithFallback = ({
+  fallback = "image-not-found-poster.png",
+  ...props
+}: ImageWithFallbackProps) => {
   const { src, ...rest } = props;
   const [imgSrc, setImgSrc] = useState(src);
-  //   const imageLoader = ({ src, width, quality }: ImageLoaderProps) => {
-  //     return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
-  //   };
+  const imageLoader: ImageLoaderFunction = ({ src, width = 300, quality }) => {
+    console.log(src);
+    return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+  };
 
   return (
     <Image
       {...rest}
       alt={rest.alt}
       src={imgSrc}
-      //   loader={imageLoader}
+      // loader={imageLoader}
+
       onError={() => {
-        setImgSrc("/image-not-found.png");
+        setImgSrc(fallback);
       }}
     />
   );
