@@ -1,51 +1,35 @@
 import { Movie, useMoviesContext } from "../contexts/movies-context";
+import { MovieOpenTypes } from "../page";
+import ListLoading from "./list-Loading";
+import ListError from "./list-error";
 import MovieItem from "./movie-item";
 
 interface MovieListProps {
   rounded?: boolean;
   movies: Movie[];
+  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
 }
 
-const MoviesList = ({ rounded = true, movies }: MovieListProps) => {
+const MoviesList = ({
+  rounded = true,
+  movies,
+  setIsMovieInfoOpen,
+}: MovieListProps) => {
   const { isError, isLoading, search, moviesInfo } = useMoviesContext();
 
   if (isError) {
-    return (
-      <div className="flex flex-col items-center justify-start gap-2">
-        <div
-          className={`${
-            rounded && "rounded-lg"
-          } flex w-full flex-col rounded-b-lg bg-primary-3 p-2`}
-        >
-          <div className="flex items-center justify-center">
-            <p>Ocorreu um erro, tente novamente em alguns instantes.</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ListError rounded={rounded} />;
   }
   if (isLoading) {
-    return (
-      <div className="flex flex-col items-center justify-start gap-2">
-        <div
-          className={`${
-            rounded && "rounded-lg"
-          } flex w-full flex-col rounded-b-lg bg-primary-3 p-2`}
-        >
-          <div className="flex items-center justify-start">
-            <p>Loading...</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <ListLoading rounded={rounded} />;
   }
 
   return (
-    <div className="flex flex-col items-center justify-start gap-2">
+    <div className="flex w-full flex-col items-start justify-start gap-2 rounded-lg bg-primary-3  ">
       <div
         className={`${
-          rounded && "rounded-lg"
-        } flex w-full flex-col rounded-b-lg bg-primary-3 p-2`}
+          rounded && "bg-primary-3-opacity rounded-b-none rounded-t-lg "
+        } flex w-full flex-col rounded-b-lg bg-primary-3  p-2`}
       >
         {rounded ? (
           search !== "" ? (
@@ -64,10 +48,18 @@ const MoviesList = ({ rounded = true, movies }: MovieListProps) => {
           </p>
         )}
       </div>
-
-      {movies.map((movie) => {
-        return <MovieItem key={movie.id} movie={movie} />;
-      })}
+      <div className="flex w-full flex-col gap-2 p-2">
+        {movies.map((movie) => {
+          return (
+            <MovieItem
+              movieId={movie.id}
+              setIsMovieInfoOpen={setIsMovieInfoOpen}
+              key={movie.id}
+              movie={movie}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
