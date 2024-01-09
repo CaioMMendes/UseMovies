@@ -28,6 +28,15 @@ interface Infos {
   totalPage: number;
   totalResults: number;
 }
+
+export interface WatchedMoviesTypes {
+  id: number;
+  poster_path: string;
+  title: string;
+  vote_average: number;
+  release_date: string;
+  runtime: number;
+}
 interface MoviesContextProps {
   movies: Movie[] | [];
   setMovies: React.Dispatch<React.SetStateAction<Movie[]>>;
@@ -39,6 +48,10 @@ interface MoviesContextProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   moviesInfo: Infos;
   setMoviesInfo: React.Dispatch<React.SetStateAction<Infos>>;
+  watchedMovies: WatchedMoviesTypes[] | [];
+  setWatchedMovies: React.Dispatch<
+    React.SetStateAction<WatchedMoviesTypes[] | []>
+  >;
 }
 
 const MoviesContext = createContext<MoviesContextProps | undefined>(undefined);
@@ -57,16 +70,9 @@ export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
     totalPage: 0,
     totalResults: 0,
   });
-  //   const [isLoading, setIsLoading] = useState(true);
-
-  //   useEffect(() => {
-  //     const storageMovies = localStorage.getItem("movies")!;
-  //     if (Array.isArray(JSON.parse(storageMovies))) {
-  //       setMovies(JSON.parse(storageMovies));
-  //     }
-  //     setIsLoading(false);
-  //   }, []);
-
+  const [watchedMovies, setWatchedMovies] = useState<WatchedMoviesTypes[] | []>(
+    [],
+  );
   const contextValue: MoviesContextProps = {
     movies,
     setMovies,
@@ -78,6 +84,8 @@ export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
     setSearch,
     moviesInfo,
     setMoviesInfo,
+    watchedMovies,
+    setWatchedMovies,
   };
 
   return (
