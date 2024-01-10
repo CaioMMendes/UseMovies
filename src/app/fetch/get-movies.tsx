@@ -1,18 +1,21 @@
 "use server";
 
 interface GetMoviesProps {
-  page?: number;
+  pageParam?: number;
   search: string;
 }
 
-export default async function getMovies({ page = 1, search }: GetMoviesProps) {
+export default async function getMovies({
+  pageParam = 1,
+  search,
+}: GetMoviesProps) {
   const apiKey = process.env.API_KEY;
   const token = process.env.API_TOKEN;
 
   const url =
     search === ""
-      ? `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&language=pt-BR&page=${page}`
-      : `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&include_adult=false&language=pt-BR&page=${page}&query=${search}`;
+      ? `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&language=pt-BR&page=${pageParam}`
+      : `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&include_adult=false&language=pt-BR&page=${pageParam}&query=${search}`;
 
   const response = await fetch(url, {
     method: "GET",
