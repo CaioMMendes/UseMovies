@@ -20,6 +20,7 @@ export default function Error({
       <h2 className="text-lg ">Something went wrong!</h2>
       <Button
         variant="button"
+        className="max-w-96"
         onClick={
           // Attempt to recover by trying to re-render the segment
           () => reset()

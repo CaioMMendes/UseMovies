@@ -43,10 +43,7 @@ const MoviesWatched = ({ setIsMovieInfoOpen }: MoviesWatchedProps) => {
         <div className="flex items-center justify-between"></div>
       </div>
       {isOpenList && (
-        <MoviesWatchedList
-          setIsMovieInfoOpen={setIsMovieInfoOpen}
-          movies={[]}
-        />
+        <MoviesWatchedList setIsMovieInfoOpen={setIsMovieInfoOpen} />
       )}
     </div>
   );

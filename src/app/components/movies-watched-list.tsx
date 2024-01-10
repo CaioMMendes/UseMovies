@@ -50,6 +50,7 @@ const MoviesWatchedList = ({ setIsMovieInfoOpen }: MoiviesWatchedListProps) => {
           {watchedMovies.map((movie: WatchedMoviesTypes) => {
             return (
               <MovieItem
+                watched={true}
                 movieId={movie.id}
                 setIsMovieInfoOpen={setIsMovieInfoOpen}
                 key={movie.id}

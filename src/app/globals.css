@@ -23,3 +23,7 @@
   background: #618666;
   border-radius: 999px;
 }
+
+html {
+  scrollbar-gutter: stable;
+}

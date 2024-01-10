@@ -28,7 +28,7 @@ const MoviesList = ({
     <div className="flex w-full flex-col items-start justify-start gap-2 rounded-lg bg-primary-3  ">
       <div
         className={`${
-          rounded && "bg-primary-3-opacity rounded-b-none rounded-t-lg "
+          rounded && "rounded-b-none rounded-t-lg bg-primary-3-opacity "
         } flex w-full flex-col rounded-b-lg bg-primary-3  p-2`}
       >
         {rounded ? (
@@ -48,7 +48,7 @@ const MoviesList = ({
           </p>
         )}
       </div>
-      <div className="flex w-full flex-col gap-2 p-2">
+      <ul className="flex w-full flex-col gap-2 p-2">
         {movies.map((movie) => {
           return (
             <MovieItem
@@ -59,7 +59,7 @@ const MoviesList = ({
             />
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };
