@@ -95,8 +95,9 @@ const MoviesList = ({
           );
         })}
       </ul>
-      <div ref={loadMoreRef} className={`flex`}>
+      <div ref={loadMoreRef} className={`flex flex-col gap-1`}>
         {isFetchingNextPage ? "Loading more..." : ""}
+        <div>{isFetching && isFetchingNextPage ? "Fetching..." : null}</div>
       </div>
       {moviesInfo.page < moviesInfo.totalPage && (
         <div className="flex w-full">
@@ -109,7 +110,6 @@ const MoviesList = ({
           </Button>
         </div>
       )}
-      <div>{isFetching && isFetchingNextPage ? "Fetching..." : null}</div>
     </div>
   );
 };

@@ -49,7 +49,7 @@ const MovieItem = ({
         className="z-0 flex w-full items-center justify-start gap-3 rounded-lg  bg-primary-3-opacity  "
         onClick={handleMovieItemClick}
       >
-        <div className="flex w-2/6 max-w-52 items-center justify-start rounded-l-lg md:w-1/5">
+        <div className="flex h-36 w-24 items-center justify-start rounded-l-lg md:h-[186px] md:w-32">
           <ImageWithFallback
             //   src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
@@ -58,7 +58,7 @@ const MovieItem = ({
             height={0}
             fallback="/image-not-found-poster.png"
             sizes="100vw"
-            className="h-auto  w-auto  rounded-l-lg"
+            className="h-auto  w-full  rounded-l-lg"
             style={{
               objectFit: "contain",
             }}
