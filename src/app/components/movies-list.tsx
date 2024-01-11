@@ -1,8 +1,14 @@
+"use client";
+import { MouseEventHandler, useEffect, useRef } from "react";
+import { useFetchContext } from "../contexts/fetch-context";
 import { Movie, useMoviesContext } from "../contexts/movies-context";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import useIntersectionObservertwo from "../hooks/useIntersectionObservertwo";
 import { MovieOpenTypes } from "../page";
 import ListLoading from "./list-Loading";
 import ListError from "./list-error";
 import MovieItem from "./movie-item";
+import Button from "./button";
 
 interface MovieListProps {
   rounded?: boolean;
@@ -15,12 +21,41 @@ const MoviesList = ({
   movies,
   setIsMovieInfoOpen,
 }: MovieListProps) => {
-  const { isError, isLoading, search, moviesInfo } = useMoviesContext();
+  const loadMoreRef = useRef(null);
 
+  const { isError, isLoading, search, moviesInfo } = useMoviesContext();
+  const { fetchNextPageContext, isFetchingNextPage, isFetching } =
+    useFetchContext();
+
+  useIntersectionObservertwo({
+    target: loadMoreRef,
+    onIntersect: () => {
+      if (moviesInfo.page < moviesInfo.totalPage) {
+        fetchNextPageContext();
+      }
+    },
+    enabled: moviesInfo.page < moviesInfo.totalPage,
+  });
+
+  // useEffect(() => {
+  //   console.log(loadMoreRef);
+  //   console.log(moviesInfo.page);
+  //   console.log(moviesInfo.totalPage);
+  //   if (isVisible && moviesInfo.page < moviesInfo.totalPage) {
+  //     fetchNextPageContext();
+  //   }
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [entry, loadMoreRef]);
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    if (moviesInfo.page < moviesInfo.totalPage) {
+      fetchNextPageContext();
+    }
+  };
   if (isError) {
     return <ListError rounded={rounded} />;
   }
-  if (isLoading) {
+  if (isLoading && loadMoreRef === null) {
     return <ListLoading rounded={rounded} />;
   }
 
@@ -60,6 +95,21 @@ const MoviesList = ({
           );
         })}
       </ul>
+      <div ref={loadMoreRef} className={`flex`}>
+        {isFetchingNextPage ? "Loading more..." : ""}
+      </div>
+      {moviesInfo.page < moviesInfo.totalPage && (
+        <div className="flex w-full">
+          <Button
+            variant="button"
+            className="w-full"
+            onClick={handleButtonClick}
+          >
+            Load More
+          </Button>
+        </div>
+      )}
+      <div>{isFetching && isFetchingNextPage ? "Fetching..." : null}</div>
     </div>
   );
 };
