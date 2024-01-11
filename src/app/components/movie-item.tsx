@@ -84,7 +84,9 @@ const MovieItem = ({
               )}
               <Badge
                 className="flex"
-                value={movie.vote_average.toFixed(2)}
+                value={
+                  movie.vote_average ? movie.vote_average.toFixed(2) : "0.00"
+                }
                 type={"star"}
               />
             </ul>
