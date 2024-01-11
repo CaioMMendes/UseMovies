@@ -23,7 +23,7 @@ export interface Movie {
   vote_count: number;
 }
 
-interface Infos {
+export interface Infos {
   page: number;
   totalPage: number;
   totalResults: number;
@@ -62,7 +62,7 @@ interface MoviesProviderProps {
 
 export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isError, setIsError] = useState<boolean>(false);
   const [search, setSearch] = useState<string>("");
   const [moviesInfo, setMoviesInfo] = useState<Infos>({

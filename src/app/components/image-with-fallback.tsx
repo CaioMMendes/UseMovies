@@ -23,7 +23,6 @@ const ImageWithFallback = React.forwardRef<
 >(({ fallback = "/image-not-found-poster.png", src, alt, ...props }, ref) => {
   const [error, setError] = useState<boolean>(false);
   // const imageLoader: ImageLoaderFunction = ({ src, width = 300, quality }) => {
-  //   console.log(src);
   //   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
   // };
 

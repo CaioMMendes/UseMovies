@@ -5,10 +5,7 @@ interface GetMoviesProps {
   search: string;
 }
 
-export default async function getMovies({
-  pageParam = 1,
-  search,
-}: GetMoviesProps) {
+export default async function getMovies({ pageParam, search }: GetMoviesProps) {
   const apiKey = process.env.API_KEY;
   const token = process.env.API_TOKEN;
 

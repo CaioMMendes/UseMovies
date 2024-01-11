@@ -35,14 +35,12 @@ export default async function getMovieCasts({ id }: GetMovieCastsProps) {
 
   if (response.ok) {
     const casts = await response.json();
-    console.log(casts);
     return {
       status: 200,
       message: "Elenco encontrados com sucesso",
       casts: casts.cast,
     };
   } else {
-    console.log("first");
     return {
       status: 400,
       message: "Ocorreu um erro ao tentar realizar a busca",
