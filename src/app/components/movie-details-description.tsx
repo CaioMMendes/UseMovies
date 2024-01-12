@@ -7,6 +7,8 @@ import {
 } from "../contexts/movies-context";
 import Badge from "./badge";
 import dateConveror from "@/utils/date-conversor";
+import UserStars from "./user-stars";
+import { useState } from "react";
 
 interface MovieDetailsDescriptionProps {
   data: MovieDetailsDataTypes;
@@ -17,8 +19,8 @@ const MovieDetailsDescription = ({
   data,
   id,
 }: MovieDetailsDescriptionProps) => {
-  const { movies, watchedMovies, setWatchedMovies } = useMoviesContext();
-
+  const { watchedMovies, setWatchedMovies } = useMoviesContext();
+  const [stars, setStars] = useState<number>(0);
   const handleAddMovieClick = () => {
     const alreadyAdd = watchedMovies.filter((movie) => movie.id === id);
     if (alreadyAdd.length === 0) {
@@ -30,6 +32,7 @@ const MovieDetailsDescription = ({
           vote_average: data.vote_average,
           release_date: data.release_date,
           runtime: data.runtime,
+          user_average: stars || "Sem avaliação",
         },
         ...watchedMovies,
       ]);
@@ -43,6 +46,7 @@ const MovieDetailsDescription = ({
             vote_average: data.vote_average,
             release_date: data.release_date,
             runtime: data.runtime,
+            user_average: stars || "Sem avaliação",
           },
           ...watchedMovies,
         ]),
@@ -70,9 +74,12 @@ const MovieDetailsDescription = ({
           <Badge value={data.vote_average.toFixed(2)} type={"star"} />
         </p>
       </ul>
-      <Button variant="button" onClick={handleAddMovieClick}>
-        Adicionar a lista
-      </Button>
+      <div className="flex flex-col gap-1 rounded-lg bg-primary-3-opacity pt-2">
+        <UserStars stars={stars} setStars={setStars} />
+        <Button variant="button" onClick={handleAddMovieClick}>
+          Adicionar a lista
+        </Button>
+      </div>
     </>
   );
 };

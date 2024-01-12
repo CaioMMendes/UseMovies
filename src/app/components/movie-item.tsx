@@ -89,6 +89,20 @@ const MovieItem = ({
                 }
                 type={"star"}
               />
+              {watched && (
+                <div className="flex text-sm md:text-base">
+                  <p className="pl-3">Sua avaliação:</p>
+                  <Badge
+                    className="flex"
+                    value={
+                      typeof movie.user_average === "number"
+                        ? movie.user_average.toFixed(2)
+                        : movie.user_average
+                    }
+                    type={"star"}
+                  />
+                </div>
+              )}
             </ul>
             {watched && (
               <Button

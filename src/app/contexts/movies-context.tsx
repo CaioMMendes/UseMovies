@@ -21,6 +21,7 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  user_average: number | string;
 }
 
 export interface Infos {
@@ -36,6 +37,7 @@ export interface WatchedMoviesTypes {
   vote_average: number;
   release_date: string;
   runtime: number;
+  user_average: number | string;
 }
 interface MoviesContextProps {
   movies: Movie[] | [];
