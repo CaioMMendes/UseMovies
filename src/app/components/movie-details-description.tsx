@@ -18,7 +18,6 @@ const MovieDetailsDescription = ({
   id,
 }: MovieDetailsDescriptionProps) => {
   const { movies, watchedMovies, setWatchedMovies } = useMoviesContext();
-  const exactMovie = movies.filter((movie) => movie.id === id)[0];
 
   const handleAddMovieClick = () => {
     const alreadyAdd = watchedMovies.filter((movie) => movie.id === id);
@@ -28,7 +27,7 @@ const MovieDetailsDescription = ({
           id: data.id,
           poster_path: data.poster_path,
           title: data.title,
-          vote_average: exactMovie.vote_average,
+          vote_average: data.vote_average,
           release_date: data.release_date,
           runtime: data.runtime,
         },
@@ -41,7 +40,7 @@ const MovieDetailsDescription = ({
             id: data.id,
             poster_path: data.poster_path,
             title: data.title,
-            vote_average: exactMovie.vote_average,
+            vote_average: data.vote_average,
             release_date: data.release_date,
             runtime: data.runtime,
           },
@@ -68,7 +67,7 @@ const MovieDetailsDescription = ({
         </p>
         <p className="flex">
           Avaliação:{" "}
-          <Badge value={exactMovie.vote_average.toFixed(2)} type={"star"} />
+          <Badge value={data.vote_average.toFixed(2)} type={"star"} />
         </p>
       </ul>
       <Button variant="button" onClick={handleAddMovieClick}>

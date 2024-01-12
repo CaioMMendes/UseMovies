@@ -60,7 +60,7 @@ const Searchbar = () => {
       setDebounceFetch(debounceSearch);
       if (data.pages.length > 0) {
         data.pages.map((page, index) => {
-          if (index === 0) return setMovies(page.movies.results);
+          if (index === 0) return setMovies([...page.movies.results]);
           return setMovies((movies) => [...movies, ...page.movies.results]);
         });
         setMoviesInfo({
