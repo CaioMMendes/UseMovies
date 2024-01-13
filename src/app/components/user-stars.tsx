@@ -7,7 +7,7 @@ interface UserStarsProps {
   stars: number;
   setStars: Dispatch<SetStateAction<number>>;
 }
-const UserStars = ({ stars, setStars }: UserStarsProps) => {
+const UserStars = ({ stars = 0, setStars }: UserStarsProps) => {
   const handleStarClick = (stars: number) => {
     setStars(stars);
   };
@@ -27,6 +27,7 @@ const UserStars = ({ stars, setStars }: UserStarsProps) => {
           </button>
         );
       })}
+      {!stars || ` ${stars}/10`}
     </div>
   );
 };
