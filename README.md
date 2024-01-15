@@ -23,6 +23,6 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 <https://use-movies-two.vercel.app/>
 
-## 📦  Exemplo
+## 👀  Exemplo
 
-<img  title="Gif projeto desktop" src="./public/github/project-gif.gif" height="375" width="375"  />
+<img  title="Gif projeto desktop" src="./public/github/project-gif.gif" height="324" width="600"  />
