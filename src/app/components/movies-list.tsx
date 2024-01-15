@@ -55,7 +55,7 @@ const MoviesList = ({
   if (isError) {
     return <ListError rounded={rounded} />;
   }
-  if (isLoading && loadMoreRef === null) {
+  if (isLoading) {
     return <ListLoading rounded={rounded} />;
   }
 

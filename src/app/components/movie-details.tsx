@@ -83,7 +83,6 @@ const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
   if (movieDetailsIsLoading) {
     return <ListLoading rounded={true} />;
   }
-  console.log(movieDetailsData);
   return (
     <div className="flex w-full flex-col items-start justify-start gap-2 rounded-lg bg-primary-3 ">
       <div className="relative flex w-full  items-start justify-center rounded-lg md:min-h-80">
