@@ -5,10 +5,12 @@ interface GetMoviesProps {
   search: string;
 }
 
-export default async function getMovies({ pageParam, search }: GetMoviesProps) {
+export default async function getMovies({
+  pageParam = 1,
+  search,
+}: GetMoviesProps) {
   const apiKey = process.env.API_KEY;
   const token = process.env.API_TOKEN;
-
   const url =
     search === ""
       ? `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&include_adult=false&language=pt-BR&page=${pageParam}`
@@ -23,7 +25,6 @@ export default async function getMovies({ pageParam, search }: GetMoviesProps) {
   });
   if (response.ok) {
     const movies = await response.json();
-    // console.log(movies);
     return {
       status: 200,
       message: "Filmes encontrados com sucesso",

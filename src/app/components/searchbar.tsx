@@ -46,10 +46,8 @@ const Searchbar = () => {
     setSearchInput(e.target.value);
   };
   const {
-    data: moviesData,
     isError: moviesIsError,
     isLoading: moviesIsLoading,
-    fetchNextPage,
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
@@ -58,11 +56,12 @@ const Searchbar = () => {
     onSuccess: (data: InfiniteData<PageProps>) => {
       setSearch(debounceSearch);
       setDebounceFetch(debounceSearch);
-      if (data.pages.length > 0) {
+      if (data.pages[0].movies) {
         data.pages.map((page, index) => {
           if (index === 0) return setMovies([...page.movies.results]);
           return setMovies((movies) => [...movies, ...page.movies.results]);
         });
+        // console.log(data.pages.flatMap((array) => array));
         setMoviesInfo({
           totalPage: data.pages[0].movies.total_pages,
           totalResults: data.pages[0].movies.total_results,
