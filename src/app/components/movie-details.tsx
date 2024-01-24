@@ -129,7 +129,7 @@ const MovieDetails = ({ movieId }: MovieDetailsProps) => {
           <MoveLeftIcon width={24} height={24} />
         </Button>
       </div>
-      <div className="flex flex-col gap-2 p-2">
+      <div className="flex w-full flex-col gap-2 p-2">
         <MovieDetailsDescription data={movieDetailsData?.movies} id={movieId} />
         <h3>Elenco:</h3>
         {movieCastsIsLoading && <div>Loading...</div>}

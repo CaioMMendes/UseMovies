@@ -74,7 +74,7 @@ const MovieDetailsDescription = ({
           <Badge value={data.vote_average.toFixed(2)} type={"star"} />
         </p>
       </ul>
-      <div className="flex flex-col gap-1 rounded-lg bg-primary-3-opacity pt-2">
+      <div className="flex w-full flex-col gap-1 rounded-lg bg-primary-3-opacity pt-2">
         <UserStars stars={stars} setStars={setStars} />
         <Button variant="button" onClick={handleAddMovieClick}>
           Adicionar a lista
