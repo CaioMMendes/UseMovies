@@ -1,6 +1,6 @@
 import { MoveLeftIcon } from "lucide-react";
 import Button from "./button";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { MovieOpenTypes } from "../page";
 import { useQuery } from "react-query";
 import getMovieDetails from "../fetch/get-movie-details";
@@ -12,9 +12,10 @@ import CastersItem from "./casters-item";
 import timeConversor from "@/utils/time-conversor";
 import MovieDetailsDescription from "./movie-details-description";
 import Image from "next/image";
+import type { Metadata, ResolvingMetadata } from "next";
+import { useMoviesContext } from "../contexts/movies-context";
 
 interface MovieDetailsProps {
-  setIsMovieInfoOpen: Dispatch<SetStateAction<MovieOpenTypes>>;
   movieId?: number;
 }
 
@@ -56,7 +57,8 @@ export interface MovieDetailsDataTypes {
   vote_count: number;
 }
 
-const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
+const MovieDetails = ({ movieId }: MovieDetailsProps) => {
+  const { setIsMovieInfoOpen } = useMoviesContext();
   const {
     data: movieDetailsData,
     isError: movieDetailsIsError,
@@ -77,12 +79,33 @@ const MovieDetails = ({ setIsMovieInfoOpen, movieId }: MovieDetailsProps) => {
     setIsMovieInfoOpen({ isOpen: false });
   };
 
+  useEffect(() => {
+    document.title = movieDetailsData?.movies?.title;
+    return () => {
+      document.title = "Use Movie";
+    };
+  }, [movieDetailsData]);
+
+  useEffect(() => {
+    const callback = (e: KeyboardEvent) => {
+      if (e.code === "Escape") {
+        handleBackButtonClick();
+      }
+    };
+    document.addEventListener("keydown", callback);
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (movieDetailsIsError || movieCastsIsError) {
     return <ListError rounded={true} />;
   }
   if (movieDetailsIsLoading) {
     return <ListLoading rounded={true} />;
   }
+
   return (
     <div className="flex w-full flex-col items-start justify-start gap-2 rounded-lg bg-primary-3 ">
       <div className="relative flex w-full  items-start justify-center rounded-lg md:min-h-80">

@@ -14,18 +14,13 @@ import ImageWithFallback from "./image-with-fallback";
 
 interface MovieItemProps {
   movie: Movie | WatchedMoviesTypes;
-  setIsMovieInfoOpen: Dispatch<SetStateAction<MovieOpenTypes>>;
   movieId: number;
   watched?: boolean;
 }
 
-const MovieItem = ({
-  movie,
-  setIsMovieInfoOpen,
-  movieId,
-  watched = false,
-}: MovieItemProps) => {
-  const { watchedMovies, setWatchedMovies } = useMoviesContext();
+const MovieItem = ({ movie, movieId, watched = false }: MovieItemProps) => {
+  const { watchedMovies, setWatchedMovies, setIsMovieInfoOpen } =
+    useMoviesContext();
   const handleMovieItemClick = () => {
     setIsMovieInfoOpen({ isOpen: true, id: movieId });
   };

@@ -13,14 +13,9 @@ import Button from "./button";
 interface MovieListProps {
   rounded?: boolean;
   movies: Movie[];
-  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
 }
 
-const MoviesList = ({
-  rounded = true,
-  movies,
-  setIsMovieInfoOpen,
-}: MovieListProps) => {
+const MoviesList = ({ rounded = true, movies }: MovieListProps) => {
   const loadMoreRef = useRef(null);
 
   const { isError, isLoading, search, moviesInfo } = useMoviesContext();
@@ -85,14 +80,7 @@ const MoviesList = ({
       </div>
       <ul className="flex w-full flex-col gap-2 p-2">
         {movies.map((movie) => {
-          return (
-            <MovieItem
-              movieId={movie.id}
-              setIsMovieInfoOpen={setIsMovieInfoOpen}
-              key={movie.id}
-              movie={movie}
-            />
-          );
+          return <MovieItem movieId={movie.id} key={movie.id} movie={movie} />;
         })}
       </ul>
       <div ref={loadMoreRef} className={`flex flex-col gap-1`}>

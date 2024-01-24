@@ -11,20 +11,15 @@ export interface MovieOpenTypes {
 }
 
 export default function Home() {
-  const { movies } = useMoviesContext();
-  const [isMovieInfoOpen, setIsMovieInfoOpen] = useState<MovieOpenTypes>({
-    isOpen: false,
-  });
+  const { movies, isMovieInfoOpen } = useMoviesContext();
+
   return (
     <div className="flex  w-full flex-col gap-4 p-2 md:grid md:grid-cols-2 ">
-      <MoviesWatched setIsMovieInfoOpen={setIsMovieInfoOpen} />
+      <MoviesWatched />
       {isMovieInfoOpen.isOpen ? (
-        <MovieDetails
-          movieId={isMovieInfoOpen.id}
-          setIsMovieInfoOpen={setIsMovieInfoOpen}
-        />
+        <MovieDetails movieId={isMovieInfoOpen.id} />
       ) : (
-        <MoviesList setIsMovieInfoOpen={setIsMovieInfoOpen} movies={movies} />
+        <MoviesList movies={movies} />
       )}
     </div>
   );

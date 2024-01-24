@@ -1,19 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
-  Movie,
   WatchedMoviesTypes,
   useMoviesContext,
 } from "../contexts/movies-context";
-import { MovieOpenTypes } from "../page";
 import MovieItem from "./movie-item";
-import MoviesWatched from "./movies-watched";
 
-interface MoiviesWatchedListProps {
-  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
-}
-
-const MoviesWatchedList = ({ setIsMovieInfoOpen }: MoiviesWatchedListProps) => {
+const MoviesWatchedList = () => {
   const { watchedMovies, setWatchedMovies } = useMoviesContext();
 
   useEffect(() => {
@@ -52,7 +45,6 @@ const MoviesWatchedList = ({ setIsMovieInfoOpen }: MoiviesWatchedListProps) => {
               <MovieItem
                 watched={true}
                 movieId={movie.id}
-                setIsMovieInfoOpen={setIsMovieInfoOpen}
                 key={movie.id}
                 movie={movie}
               />

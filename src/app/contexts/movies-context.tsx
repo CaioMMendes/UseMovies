@@ -50,6 +50,8 @@ interface MoviesContextProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
   moviesInfo: Infos;
   setMoviesInfo: React.Dispatch<React.SetStateAction<Infos>>;
+  isMovieInfoOpen: MovieOpenTypes;
+  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
   watchedMovies: WatchedMoviesTypes[] | [];
   setWatchedMovies: React.Dispatch<
     React.SetStateAction<WatchedMoviesTypes[] | []>
@@ -60,6 +62,11 @@ const MoviesContext = createContext<MoviesContextProps | undefined>(undefined);
 
 interface MoviesProviderProps {
   children: ReactNode;
+}
+
+export interface MovieOpenTypes {
+  isOpen: boolean;
+  id?: number;
 }
 
 export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
@@ -75,6 +82,9 @@ export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
   const [watchedMovies, setWatchedMovies] = useState<WatchedMoviesTypes[] | []>(
     [],
   );
+  const [isMovieInfoOpen, setIsMovieInfoOpen] = useState<MovieOpenTypes>({
+    isOpen: false,
+  });
   const contextValue: MoviesContextProps = {
     movies,
     setMovies,
@@ -88,6 +98,8 @@ export const MoviesProvider: React.FC<MoviesProviderProps> = ({ children }) => {
     setMoviesInfo,
     watchedMovies,
     setWatchedMovies,
+    isMovieInfoOpen,
+    setIsMovieInfoOpen,
   };
 
   return (

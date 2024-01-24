@@ -6,11 +6,7 @@ import Button from "./button";
 import { MovieOpenTypes } from "../page";
 import MoviesWatchedList from "./movies-watched-list";
 
-interface MoviesWatchedProps {
-  setIsMovieInfoOpen: React.Dispatch<React.SetStateAction<MovieOpenTypes>>;
-}
-
-const MoviesWatched = ({ setIsMovieInfoOpen }: MoviesWatchedProps) => {
+const MoviesWatched = () => {
   const [isOpenList, setIsOpenList] = useState(true);
 
   const handleIsOpenList = () => {
@@ -42,9 +38,7 @@ const MoviesWatched = ({ setIsMovieInfoOpen }: MoviesWatchedProps) => {
         </div>
         <div className="flex items-center justify-between"></div>
       </div>
-      {isOpenList && (
-        <MoviesWatchedList setIsMovieInfoOpen={setIsMovieInfoOpen} />
-      )}
+      {isOpenList && <MoviesWatchedList />}
     </div>
   );
 };

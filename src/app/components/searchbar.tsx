@@ -25,8 +25,14 @@ export interface PageProps {
 }
 
 const Searchbar = () => {
-  const { setMovies, setIsError, setIsLoading, setSearch, setMoviesInfo } =
-    useMoviesContext();
+  const {
+    setMovies,
+    setIsError,
+    setIsLoading,
+    setSearch,
+    setMoviesInfo,
+    setIsMovieInfoOpen,
+  } = useMoviesContext();
   const {
     setIsFetching,
     setIsFetchingNextPage,
@@ -90,7 +96,9 @@ const Searchbar = () => {
         });
       }
     }
-
+    setIsMovieInfoOpen((isMovieInfoOpen) => {
+      return { ...isMovieInfoOpen, isOpen: false };
+    });
     //eslint-disable-next-line
   }, [debounceSearch, moviesIsLoading, isFetching, isFetchingNextPage]);
 
