@@ -22,9 +22,9 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${inter.className}  flex  flex-col`}>
-        <h1 className="m-auto text-xl font-medium">Em Manuntenção</h1>
+        {/* <h1 className="m-auto text-xl font-medium">Em Manuntenção</h1> */}
         {/* //todo decomentar isso caso clone */}
-        {/* <ReactQueryProvider>
+        <ReactQueryProvider>
           <MoviesProvider>
             <FetchProvider>
               <Header />
@@ -34,7 +34,7 @@ export default function RootLayout({
               <Footer />
             </FetchProvider>
           </MoviesProvider>
-        </ReactQueryProvider> */}
+        </ReactQueryProvider>
       </body>
     </html>
   );
