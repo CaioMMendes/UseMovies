@@ -33,7 +33,7 @@ const ImageWithFallback = React.forwardRef<
       alt={alt}
       ref={ref}
       // loader={imageLoader}
-
+      unoptimized
       onError={() => setError(true)}
     />
   );
